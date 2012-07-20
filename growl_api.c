@@ -1,7 +1,9 @@
-#include "real_growl_api.h"
+/* TODO: These have to be rewritten for C++ */
 
-VALUE rb_mRealGrowl;
-VALUE rb_cRealGrowlApplication;
+#include "growl_api.h"
+
+VALUE rb_mGrowl;
+VALUE rb_cGrowlApplication;
 
 static NSString*
 build_nsstring(VALUE string) {
@@ -41,7 +43,7 @@ free_delegate(id delegate) {
 
 static VALUE
 alloc_delegate(VALUE klass) {
-  return Data_Wrap_Struct(klass, 0, free_delegate, [[RubyDelegate alloc] init]);  
+  return Data_Wrap_Struct(klass, 0, free_delegate, [[GrowlDelegate alloc] init]);  
 }
 
 VALUE
@@ -74,7 +76,7 @@ VALUE
 method_notify(VALUE self, VALUE options) {
   NSAutoreleasePool *pool = create_autorelease_pool();
   id delegate = NULL;
-  Data_Get_Struct(self, RubyDelegate, delegate);
+  Data_Get_Struct(self, GrowlDelegate, delegate);
   
   VALUE title             = rb_hash_aref(options, ID2SYM(rb_intern("title")));
   VALUE description       = rb_hash_aref(options, ID2SYM(rb_intern("description")));
@@ -110,7 +112,7 @@ method_init(VALUE self, VALUE applicationName) {
   NSAutoreleasePool *pool = create_autorelease_pool();
   id delegate = NULL;  
   
-  Data_Get_Struct(self, RubyDelegate, delegate);  
+  Data_Get_Struct(self, GrowlDelegate, delegate);  
   NSString *nsAppName = build_nsstring(applicationName);
   [delegate setApplicationName: nsAppName];
   

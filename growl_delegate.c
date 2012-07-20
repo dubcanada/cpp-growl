@@ -1,11 +1,11 @@
-#include "ruby_delegate.h"
+#include "growl_delegate.h"
 
-@implementation RubyDelegate
+@implementation GrowlDelegate
 @synthesize applicationName, callbackProc;
 
 -(id)init {
   if((self = [super init])) {
-    applicationName = [@"RealGrowl" retain];
+    applicationName = [@"Notification" retain];
     return self;
   }
   
@@ -17,12 +17,13 @@
 }
 
 -(NSDictionary *)registrationDictionaryForGrowl {
-  NSArray *notifications = [NSArray arrayWithObject:REAL_GROWL_NOTIFICATION];
+  NSArray *notifications = [NSArray arrayWithObject:GROWL_NOTIFICATION];
   return [NSDictionary dictionaryWithObjectsAndKeys: [self applicationName], GROWL_APP_ID, [self applicationName], GROWL_APP_NAME, notifications, GROWL_NOTIFICATIONS_ALL, notifications, GROWL_NOTIFICATIONS_DEFAULT, nil];
 }
 
 -(void)growlNotificationWasClicked:(id)clickContext {
   if(callbackProc != Qnil) {
+    // TODO: This needs to call a C++ function
     rb_funcall(callbackProc, rb_intern("call"), 0);
   }
 }

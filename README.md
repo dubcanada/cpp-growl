@@ -1,10 +1,10 @@
-real-growl
+c++-growl
 ==========
 
 Description
 -----------
 
-A Growl notification library that uses native C bindings to interact with GrowlApplicationBridge rather than Growl's network API.
+A Growl notification library that uses native C++ bindings to interact with GrowlApplicationBridge.
 
 Synopsis
 --------

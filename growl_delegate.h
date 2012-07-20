@@ -1,10 +1,9 @@
 #include <Foundation/Foundation.h>
 #include <Growl/Growl.h>
-#include "ruby.h"
 
-#define REAL_GROWL_NOTIFICATION XSTR("RealGrowlNotification")
+#define GROWL_NOTIFICATION XSTR("GrowlNotification")
 
-@interface RubyDelegate : NSObject<GrowlApplicationBridgeDelegate>
+@interface GrowlDelegate : NSObject<GrowlApplicationBridgeDelegate>
 {
   NSString *applicationName;
   VALUE callbackProc;

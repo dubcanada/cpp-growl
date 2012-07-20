@@ -1,5 +1,5 @@
-#include "ruby_delegate.h"
-#include "ruby.h"
+/* TODO: These have to be rewritten for C++ */
+
 #include <objc/runtime.h>
 #include <Growl/Growl.h>
 #include <Foundation/Foundation.h>
